@@ -140,7 +140,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,  # Es la clave de el token
+    'SIGNING_KEY': SECRET_KEY, 
     'VERIFYING_KEY': SECRET_KEY,
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'id',

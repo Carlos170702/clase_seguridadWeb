@@ -15,14 +15,14 @@ class Login(generics.CreateAPIView):
         body = request.data
 
         if 'username' not in body or 'password' not in body:
-            return error_response('Credenciales no validas', status=status.HTTP_400_BAD_REQUEST)
+            return error_response('Credenciales no proporcionadas', status=status.HTTP_400_BAD_REQUEST)
 
         user = self.get_queryset().filter(username=body['username']).first()
         if user is None:
-            return error_response('Usuario no valido', status=status.HTTP_404_NOT_FOUND)
+            return error_response('Credenciales no validas', status=status.HTTP_404_NOT_FOUND)
 
         if not user.password == body['password']:
-            return error_response('Contraseña no valida', status=status.HTTP_400_BAD_REQUEST)
+            return error_response('Credenciales no validas', status=status.HTTP_400_BAD_REQUEST)
 
         if not user.is_active:
             return error_response('Usuario inactivo', status=status.HTTP_400_BAD_REQUEST)

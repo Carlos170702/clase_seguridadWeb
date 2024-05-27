@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from apps.users.api.serializer import UserSerializer
 from apps.utils.response import success_response, error_response
 
@@ -15,9 +15,10 @@ class UserView(viewsets.ModelViewSet):
         return success_response(data=users_serialized)
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        body = request.data
+        serializer = self.get_serializer(data=body)
 
         if serializer.is_valid():
             serializer.save()
             return success_response(data=serializer.data)
-        return error_response(data=serializer.errors)
+        return error_response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
